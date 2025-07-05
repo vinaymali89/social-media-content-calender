@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🔤 Custom Fonts and Body Setup */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* 🌓 Dark Mode Styling */
+.dark body {
+  background-color: #1f2937; /* dark:bg-gray-900 */
+  color: #f9fafb; /* text-gray-100 */
+}
+
+/* ✨ Reusable Components */
+.card {
+  @apply bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 mb-4;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded;
+}
+
+.btn-outline-secondary {
+  @apply border border-gray-400 text-gray-700 hover:bg-gray-200 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700 rounded px-3 py-1;
+}
+
+.btn-danger {
+  @apply bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded;
+}
+
+.btn-success {
+  @apply bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded;
+}
+
+.text-heading {
+  @apply text-xl font-bold mb-3 text-indigo-600 dark:text-indigo-400;
+}
+
+.list-group-item {
+  @apply flex justify-between items-center p-2 border-b border-gray-200 dark:border-gray-700;
+}
