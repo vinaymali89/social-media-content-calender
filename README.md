@@ -72,7 +72,7 @@ src/
 ##  Installation
 
 ```bash
-git clone https://github.com/your-username/social-media-calendar.git
+git clone https://github.com/vinaymali89/social-media-content-calender.git
 cd social-media-calendar
 npm install
 npm start
