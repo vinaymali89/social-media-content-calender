@@ -1,13 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-// ✅ Declare initialState only ONCE
 const initialState = {
   selectedDates: [],
   posts: [],
   categoryFilter: 'All',
-  activeCategories: ['Meme', 'Edit', 'Bollywood'], // added
+  activeCategories: ['Meme', 'Edit', 'Bollywood'], 
   assignedPosts: {
-    unassigned: [] // All posts start here
+    unassigned: [] 
   },
   selectedPages: [],
 };
@@ -20,7 +19,7 @@ addDate: (state, action) => {
   const date = action.payload;
   if (!state.selectedDates.includes(date)) {
     state.selectedDates.push(date);
-    state.assignedPosts[date] = []; // ✅ Initialize with empty array
+    state.assignedPosts[date] = []; 
   }
 },
    removeDate: (state, action) => {
@@ -59,7 +58,7 @@ addDate: (state, action) => {
   },
 });
 
-// ✅ Export actions and reducer
+// Export actions and reducer
 export const {
   addDate,
   removeDate,

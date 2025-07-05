@@ -1,4 +1,3 @@
-// shared-components/Header.js
 import React from 'react';
 import logo from '../assets/img/smcc.png';
 

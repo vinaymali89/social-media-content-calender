@@ -23,12 +23,10 @@ export function exportScheduleToExcel(posts, selectedDates) {
         'Post Link': post.postLink,
       }));
 
-    // Add separator row (visual)
     rows.push({
       Date : '─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────',
     });
 
-    // Add TOTAL row
     rows.push({
       Date: 'TOTAL',
       'Page Name': '',
@@ -45,7 +43,6 @@ export function exportScheduleToExcel(posts, selectedDates) {
 
     const sheet = XLSX.utils.json_to_sheet(rows, { origin: 'A1' });
 
-    // 1️⃣ Set Column Widths (in characters)
     const headers = Object.keys(rows[0]);
     sheet['!cols'] = headers.map((key) =>
       key === 'Post Link' ? { wch: 28 } : { wch: 13 }

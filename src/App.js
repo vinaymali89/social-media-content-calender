@@ -15,8 +15,10 @@ import AddPostModal from './components/AddPostModal';
 import AddPostButton from './components/AddPostButton';
 import Header from './shared-components/Header';
 import Footer from './shared-components/Footer';
-import FilterModal from './components/FilterModal';
 import { setActiveCategories, setSelectedPages } from './features/calendarSlice';
+import { fetchPosts } from './utils/fakeApi';
+import logo from './assets/img/smcc.png';
+// import FilterModal from './components/FilterModal';
 
 
 function App() {
@@ -26,21 +28,23 @@ function App() {
   const [showAddPost, setShowAddPost] = useState(false);
   const [showFilterModal, setShowFilterModal] = useState(true);
 
-  useEffect(() => {
-    const localData = localStorage.getItem('scheduledPosts');
-    if (localData) {
-      dispatch(setPosts(JSON.parse(localData)));
-    } else {
-      dispatch(setPosts(posts)); // fallback to original JSON
-    }
-  }, [dispatch]);
+useEffect(() => {
+  const localData = localStorage.getItem('scheduledPosts');
+  if (localData) {
+    dispatch(setPosts(JSON.parse(localData)));
+  } else {
+    fetchPosts().then((data) => {
+      dispatch(setPosts(data));
+    });
+  }
+}, [dispatch]);
 
   useEffect(() => {
     const distributed = distributePostsByDateAndCategory(allPosts, selectedDates);
     console.log('📊 Live Preview:', distributed);
   }, [allPosts, selectedDates]);
 
-  // ✅ DnD handler
+  // sDnD handler
   const handleDragEnd = (result) => {
     const { source, destination, draggableId } = result;
 
@@ -69,9 +73,8 @@ function App() {
       <ToastContainer position="top-center" autoClose={3000} />
       <Header />
       <div className="container mt-4 mb-5">
-        {/* <ToastContainer position="top-center" autoClose={3000} /> */}
-        <h1 className="text-3xl font-bold text-center text-indigo-600">
-          📅 Social Media Content Calendar
+        <h1 className="text-3xl font-bold text-indigo-600 flex flex-row justify-center items-center text-center">
+          <img src={logo} alt="calender" height={50} width={50}/>&nbsp;&nbsp;Social Media Content Calendar
         </h1>
 
         <div className="flex justify-between gap-2 mb-1">
@@ -87,19 +90,19 @@ function App() {
         {showAddPost && <AddPostModal onClose={() => setShowAddPost(false)} />}
 
         <DragDropContext onDragEnd={handleDragEnd}>
-          {/* 💡 2-Column Layout */}
+          {/*  2-Columns view */}
           <div className="row g-4">
-            {/* Left Panel */}
+            {/* Left side */}
             <div className="col-md-5">
               <Calendar />
             </div>
 
-            {/* Right Panel */}
+            {/* Right side */}
             <div className="col-md-7">
               <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4">
                 <h2 className="text-heading mb-4">📊 Scheduled Post Preview</h2>
                 <CategorySelector />
-                <div className="mt-4 max-h-[640px] overflow-y-auto pr-2">
+                <div className="mt-4 max-h-[790px] overflow-y-auto pr-2">
                   <DistributedView />
                 </div>
               </div>

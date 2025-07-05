@@ -2,19 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 🔤 Custom Fonts and Body Setup */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   transition: background 0.3s, color 0.3s;
 }
 
-/* 🌓 Dark Mode Styling */
 .dark body {
-  background-color: #1f2937; /* dark:bg-gray-900 */
-  color: #f9fafb; /* text-gray-100 */
+  background-color: #1f2937;
+  color: #f9fafb; 
 }
 
-/* ✨ Reusable Components */
 .card {
   @apply bg-white dark:bg-gray-800 shadow-lg rounded-xl p-4 mb-4;
 }

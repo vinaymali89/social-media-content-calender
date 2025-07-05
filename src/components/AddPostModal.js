@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPosts } from '../features/calendarSlice';
+import { toast } from 'react-toastify';
 
 function AddPostModal({ onClose }) {
   const dispatch = useDispatch();
@@ -34,14 +35,25 @@ const handleChange = (e) => {
 };
 
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const updatedPosts = [...existingPosts, { ...formData, followers: +formData.followers }];
+  try {
+    const updatedPosts = [...existingPosts, {
+      ...formData,
+      followers: +formData.followers,
+    }];
+
     localStorage.setItem('scheduledPosts', JSON.stringify(updatedPosts));
     dispatch(setPosts(updatedPosts));
+
+    toast.success('✅ Post add successfully!');
     onClose();
-  };
+  } catch (error) {
+    toast.error('❌ Failed to add the post. Please try again.');
+  }
+};
+
 
 return (
   <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
